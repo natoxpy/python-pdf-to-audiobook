@@ -1,6 +1,6 @@
 from parser import slugify
 from dataclasses import dataclass
-from rich.progress import Progress
+# from rich.progress import Progress
 from threading import Thread
 from reader import read_pdf
 from parser import segmentParser
