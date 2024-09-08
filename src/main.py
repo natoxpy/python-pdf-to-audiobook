@@ -7,3 +7,5 @@ book = Book(
     chapters=chapters,
     source_path="./pdf/re-zero-vol-01.pdf",
 )
+
+book.save_audiobook()
