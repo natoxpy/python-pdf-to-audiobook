@@ -1,5 +1,9 @@
+from rich.console import Console
 import unicodedata
 import re
+
+console = Console()
+
 
 def slugify(value, allow_unicode=False):
     """
@@ -11,11 +15,16 @@ def slugify(value, allow_unicode=False):
     """
     value = str(value)
     if allow_unicode:
-        value = unicodedata.normalize('NFKC', value)
+        value = unicodedata.normalize("NFKC", value)
     else:
-        value = unicodedata.normalize('NFKD', value).encode('ascii', 'ignore').decode('ascii')
-    value = re.sub(r'[^\w\s-]', '', value.lower())
-    return re.sub(r'[-\s]+', '-', value).strip('-_')
+        value = (
+            unicodedata.normalize("NFKD", value)
+            .encode("ascii", "ignore")
+            .decode("ascii")
+        )
+    value = re.sub(r"[^\w\s-]", "", value.lower())
+    return re.sub(r"[-\s]+", "-", value).strip("-_")
+
 
 class TextSegments:
     _txt: list[str]
@@ -27,5 +36,31 @@ class TextSegments:
         return f"<TextSegments size={len(self._txt)}>"
 
 
+def split(text: list[str], delimiter: str):
+    c = []
+    for t in text:
+        ts = t.split(delimiter)
+        a = [
+            a.strip() if i == len(ts) - 1 else a.strip() + delimiter
+            for i, a in enumerate(ts)
+        ]
+        c += a
+
+    return c
+
+
+def multisplit(text: str, delimiter: list[str]):
+    c = [text]
+    for d in delimiter:
+        c = split(c, d)
+
+    if c[-1] == "":
+        c = c[:-1]
+
+    return c
+
+
 def segmentParser(text: str):
-    return TextSegments(["Hello", "world"])
+    segments = multisplit(text, ["…”", "?”", "!”", "."])
+    console.log(segments)
+    # return TextSegments(["Hello", "world"])

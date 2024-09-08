@@ -1,6 +1,10 @@
 from book import Book, Chapter
 
-chapters = [Chapter("Prologue", "The Waste Heat Of The Beginning", 14, 15)]
+chapters = [
+    Chapter("Prologue", "The Waste Heat of the Beginning", 14, 15),
+    Chapter("Chapter 1", "The End of the Beginning", 14, 15),
+    Chapter("Chapter 2", "Ending and Beginning", 14, 15),
+]
 
 book = Book(
     "Re:Zero-Starting_life_in_another_world-",

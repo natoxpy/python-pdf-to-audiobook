@@ -1,5 +1,10 @@
 from parser import slugify
 from dataclasses import dataclass
+from rich.progress import Progress
+from threading import Thread
+from reader import read_pdf
+from parser import segmentParser
+import time
 import logging
 import os
 
@@ -30,5 +35,7 @@ class Book:
 
     def save_audiobook(self, dir: str = "./", delete_segments: bool = True):
         logging.info(f"Creating audiobook for {self.title}")
-        root_path = os.path.join(dir, slugify(self.title))
-        print(root_path)
+        text = read_pdf(self.source_path, page_start=16, page_end=22)
+        segmentParser(text)
+
+        # logging.info("Turning chapters into audio file segments...")
