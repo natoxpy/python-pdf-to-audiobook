@@ -1,5 +1,9 @@
-from parser import segmentParser
+from book import Book, Chapter
 
-text_segments = segmentParser('Hello world. Gura a? "what sup dog."')
+chapters = [Chapter("Prologue", "The Waste Heat Of The Beginning", 14, 15)]
 
-print(text_segments)
+book = Book(
+    "Re:Zero-Starting_life_in_another_world-",
+    chapters=chapters,
+    source_path="./pdf/re-zero-vol-01.pdf",
+)
