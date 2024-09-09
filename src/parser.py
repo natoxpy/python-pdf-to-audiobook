@@ -62,4 +62,4 @@ def multisplit(text: str, delimiter: list[str]):
 
 def segmentParser(text: str):
     segments = multisplit(text, ["…”", "?”", "!”", "."])
-    console.log(segments)
+    return TextSegments(segments)
